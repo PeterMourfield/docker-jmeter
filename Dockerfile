@@ -12,6 +12,7 @@ RUN  apt-get update -y \
     && apt-get install  -y --no-install-recommends \
         openjdk-8-jre-headless \
         curl \
+        zip \
     && apt-get -q clean \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /tmp/dependencies \
@@ -22,3 +23,7 @@ RUN  apt-get update -y \
 ENV PATH $PATH:${JMETER_BIN}
 
 WORKDIR	${JMETER_HOME}
+
+COPY startup.sh /
+
+ENTRYPOINT ["/startup.sh"]
